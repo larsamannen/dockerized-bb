@@ -2,7 +2,7 @@ FROM toolchains/apple-sdks AS sdks
 
 m4_dnl These settings must be kept in sync between toolchain and worker
 m4_define(`PPA_CLANG',-14)m4_dnl
-m4_define(`TVOS_SDK_VERSION',15.5)m4_dnl
+m4_define(`TVOS_SDK_VERSION',15.4)m4_dnl
 m4_define(`TVOS_DEPLOYMENT_TARGET',14.0)m4_dnl
 
 m4_include(`paths.m4')m4_dnl
