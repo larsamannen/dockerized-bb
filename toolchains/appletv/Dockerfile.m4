@@ -101,7 +101,7 @@ helpers_package(giflib)
 
 helpers_package(faad2)
 
-helpers_package(libmad)
+helpers_package(libmad, ac_cv_func_fork=no)
 
 helpers_package(libogg)
 
@@ -121,7 +121,7 @@ helpers_package(a52dec)
 # In this case curl uses 10.8, this behaviour has been removed in curl 7.76.1
 # Undo patch by Debian which makes use of specific linker flags
 COPY ./packages/curl lib-helpers/packages/curl
-helpers_package(curl, --without-ssl --with-secure-transport, CFLAGS="-mtvos-version-min=TVOS_DEPLOYMENT_TARGET")
+helpers_package(curl, --without-ssl --with-secure-transport --disable-ntlm-wb, CFLAGS="-mtvos-version-min=TVOS_DEPLOYMENT_TARGET")
 
 helpers_package(freetype)
 

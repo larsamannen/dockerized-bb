@@ -80,6 +80,9 @@ fi
 # Don't build for osx
 sed -i 's/set(BUILTIN_SUPPORTED_OS .*)$/set(BUILTIN_SUPPORTED_OS )/' cmake/builtin-config-ix.cmake
 
+# Build for tvOS
+sed -i 's/option(COMPILER_RT_ENABLE_TVOS "Enable building for tvOS - Experimental" Off)$/option(COMPILER_RT_ENABLE_TVOS "Enable building for tvOS - Experimental" On)/' cmake/base-config-ix.cmake
+
 # Fix paths
 sed -i "s|COMMAND lipo |COMMAND $LIPO |g" \
 	cmake/Modules/CompilerRTDarwinUtils.cmake
@@ -105,6 +108,8 @@ do_cmake \
 	-DDARWIN_macosx_OVERRIDE_SDK_VERSION=99.99 \
 	-DDARWIN_iphoneos_CACHED_SYSROOT="$SDK_DIR" \
 	-DDARWIN_iphoneos_OVERRIDE_SDK_VERSION="$SDK_VERSION" \
+	-DDARWIN_appletvos_CACHED_SYSROOT="$SDK_DIR" \
+	-DDARWIN_appletvos_OVERRIDE_SDK_VERSION="$SDK_VERSION" \
 	-DCOMPILER_RT_BUILD_BUILTINS=ON \
 	-DCOMPILER_RT_BUILD_SANITIZERS=OFF \
 	-DCOMPILER_RT_BUILD_XRAY=OFF \
