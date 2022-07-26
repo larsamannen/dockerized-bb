@@ -91,25 +91,26 @@ local_package(compiler-rt)
 # zlib is provided in SDK
 
 # Needed for freetype (at least that's what ScummVM thinks)
-helpers_package(bzip2)
+local_package(bzip2, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libpng1.6)
+helpers_package(libpng1.6, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libjpeg-turbo, -DCMAKE_TOOLCHAIN_FILE=${TARGET_DIR}/appletv.platform)
+helpers_package(libjpeg-turbo, -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-fembed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode" -DCMAKE_TOOLCHAIN_FILE=${TARGET_DIR}/appletv.platform)
 
-helpers_package(giflib)
+helpers_package(giflib, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(faad2)
+helpers_package(faad2, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libmad, ac_cv_func_fork=no)
+helpers_package(libmad, ac_cv_func_fork=no, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libogg)
+helpers_package(libogg, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libtheora)
+helpers_package(libtheora, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libvorbis)
+COPY ./packages/libvorbis lib-helpers/packages/libvorbis
+helpers_package(libvorbis, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(flac)
+helpers_package(flac, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode", CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 # Don't enable assembly part: it doesn't build
 COPY ./packages/mpeg2dec lib-helpers/packages/mpeg2dec
@@ -121,16 +122,15 @@ helpers_package(a52dec)
 # In this case curl uses 10.8, this behaviour has been removed in curl 7.76.1
 # Undo patch by Debian which makes use of specific linker flags
 COPY ./packages/curl lib-helpers/packages/curl
-helpers_package(curl, --without-ssl --with-secure-transport --disable-ntlm-wb, CFLAGS="-mtvos-version-min=TVOS_DEPLOYMENT_TARGET")
+helpers_package(curl, --without-ssl --with-secure-transport --disable-ntlm-wb, CFLAGS="-mtvos-version-min=TVOS_DEPLOYMENT_TARGET -fembed-bitcode" CPPFLAGS="-fembed-bitcode $(CPPFLAGS)" LDFLAGS="-fembed-bitcode $(LDFLAGS)")
 
-helpers_package(freetype)
+local_package(freetype, -DFT_DISABLE_BZIP2=TRUE -DFT_DISABLE_PNG=TRUE -DFT_DISABLE_HARFBUZZ=TRUE -DFT_DISABLE_BROTLI=TRUE -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-fembed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode")
 
-helpers_package(fribidi)
+helpers_package(fribidi, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 # Don't depend on SDL2 (paradoxical)
 COPY ./packages/libsdl2-net lib-helpers/packages/libsdl2-net
 helpers_package(libsdl2-net)
 
 # Lighten glib build by removing Objective C and Cocoa and fix intl detection
-COPY packages/fluidsynth lib-helpers/packages/fluidsynth
-helpers_package(fluidsynth, -DCMAKE_SYSTEM_NAME=Darwin -DLIB_SUFFIX=)
+local_package(fluidsynth, CFLAGS="-mtvos-version-min=TVOS_DEPLOYMENT_TARGET" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-fembed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode" -DLIB_SUFFIX=)
