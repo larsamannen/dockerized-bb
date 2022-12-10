@@ -1,4 +1,4 @@
-From aa4858b628a165fba10101924c2331c132ff2147 Mon Sep 17 00:00:00 2001
+From 717d961c256ca6150e0d36e0fd6d8bf96d8a6efd Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Lars=20Sundstr=C3=B6m?= <l.sundstrom@gmail.com>
 Date: Sat, 10 Dec 2022 14:27:06 +0100
 Subject: Add AppleTVSimulator toolchain to user_examples
@@ -77,7 +77,7 @@ index 0000000..2a98445
 +The SDK should be now in your home directory.
 diff --git a/usage_examples/tvossimulator_toolchain/build.sh b/usage_examples/tvossimulator_toolchain/build.sh
 new file mode 100755
-index 0000000..448078e
+index 0000000..08c1040
 --- /dev/null
 +++ b/usage_examples/tvossimulator_toolchain/build.sh
 @@ -0,0 +1,235 @@
@@ -169,12 +169,12 @@ index 0000000..448078e
 +
 +if [ $# -lt 2 ]; then
 +    echo "usage: $0 AppleTVSimulator.sdk.tar* <target cpu>" 1>&2
-+    echo "i.e. $0 /path/to/AppleTVOS.sdk.tar.xz armv7" 1>&2
++    echo "i.e. $0 /path/to/AppleTVSimulator.sdk.tar.xz arm64" 1>&2
 +    exit 1
 +fi
 +
 +if [ -z "$TRIPLE" ]; then
-+TRIPLE="arm64-86_64-apple-darwin11"
++TRIPLE="arm-apple-darwin11"
 +fi
 +if [ -z "$TARGETDIR" ]; then
 +TARGETDIR="$PWD/target"
@@ -318,12 +318,12 @@ index 0000000..448078e
 +echo ""
 diff --git a/usage_examples/tvossimulator_toolchain/wrapper.c b/usage_examples/tvossimulator_toolchain/wrapper.c
 new file mode 100644
-index 0000000..0f754a3
+index 0000000..c81ae6c
 --- /dev/null
 +++ b/usage_examples/tvossimulator_toolchain/wrapper.c
 @@ -0,0 +1,211 @@
 +#ifndef TARGET_CPU
-+#define TARGET_CPU "armv7"
++#define TARGET_CPU "arm64"
 +#endif
 +
 +#ifndef OS_VER_MIN

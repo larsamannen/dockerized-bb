@@ -65,7 +65,7 @@ local_package(xar)
 
 local_package(toolchain)
 
-ENV HOST=aarch64-x86_64-apple-darwin11 \
+ENV HOST=aarch64-apple-darwin11 \
 	PREFIX=${TARGET_DIR}/SDK/AppleTVSimulator`'TVOS_SDK_VERSION`'.sdk/usr
 
 # We add PATH here for *-config and platform specific binaries
