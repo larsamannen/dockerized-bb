@@ -28,7 +28,7 @@ local_package(xcode-extractor, , PACKAGE=Xcode_`'I386_XCODE_VERSION.xip SDK_PLAT
 # Extract latest MacOS X, iPhoneOS and AppleTVOS SDK
 m4_define(`XCODE_VERSION', 14.1)
 COPY Xcode_`'XCODE_VERSION.xip* ${PACKAGES_LOCATION}
-local_package(xcode-extractor, , PACKAGE=Xcode_`'XCODE_VERSION.xip SDK_PLATFORMS="MacOSX iPhoneOS AppleTVOS AppleTVSimulator")
+local_package(xcode-extractor, , PACKAGE=Xcode_`'XCODE_VERSION.xip SDK_PLATFORMS="MacOSX iPhoneOS iPhoneSimulator AppleTVOS AppleTVSimulator")
 
 FROM scratch
 
