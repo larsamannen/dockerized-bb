@@ -80,7 +80,7 @@ ENV \
 
 # Without a platform file CMake fails some tests because variables are not passed to child invocations
 # Using a toolchain file seems to fix it
-COPY iphone.platform ${TARGET_DIR}/
+COPY iphonesimulator.platform ${TARGET_DIR}/
 
 # Generate meson cross file for GLib
 crossgen(darwin, aarch64)
@@ -95,7 +95,7 @@ helpers_package(bzip2)
 
 helpers_package(libpng1.6)
 
-helpers_package(libjpeg-turbo, -DCMAKE_TOOLCHAIN_FILE=${TARGET_DIR}/iphonesimulator.platform)
+helpers_package(libjpeg-turbo, -DCMAKE_TOOLCHAIN_FILE=${TARGET_DIR}/iphonesimulator.platform -DREQUIRE_SIMD=0)
 
 helpers_package(giflib)
 

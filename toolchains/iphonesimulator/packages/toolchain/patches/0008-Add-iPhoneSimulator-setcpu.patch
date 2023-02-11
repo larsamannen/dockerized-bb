@@ -1,0 +1,23 @@
+From c3e06e711ff60d1ca1e534d02ce1ee0f8379ba6d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lars=20Sundstr=C3=B6m?= <l.sundstrom@gmail.com>
+Date: Sat, 11 Feb 2023 15:24:52 +0100
+Subject: Set x86
+
+---
+ usage_examples/ios_toolchain/wrapper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/usage_examples/ios_toolchain/wrapper.c b/usage_examples/ios_toolchain/wrapper.c
+index 57d9dca..f46b173 100644
+--- a/usage_examples/ios_toolchain/wrapper.c
++++ b/usage_examples/ios_toolchain/wrapper.c
+@@ -1,5 +1,5 @@
+ #ifndef TARGET_CPU
+-#define TARGET_CPU "armv7"
++#define TARGET_CPU "x86_64"
+ #endif
+ 
+ #ifndef OS_VER_MIN
+-- 
+2.37.1 (Apple Git-137.1)
+

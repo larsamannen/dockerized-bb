@@ -1,0 +1,25 @@
+From f7a6b9ccfda8e07d16b666583a34bd5b8dd8c6ea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lars=20Sundstr=C3=B6m?= <l.sundstrom@gmail.com>
+Date: Sat, 11 Feb 2023 15:11:16 +0100
+Subject: Add iphonesimulaotr
+
+---
+ usage_examples/ios_toolchain/build.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/usage_examples/ios_toolchain/build.sh b/usage_examples/ios_toolchain/build.sh
+index be97d2d..28a866f 100755
+--- a/usage_examples/ios_toolchain/build.sh
++++ b/usage_examples/ios_toolchain/build.sh
+@@ -119,7 +119,7 @@ if [ -z "$SYSLIB" ]; then
+     echo "SDK should contain libSystem{.dylib,.tbd}" 1>&2
+     exit 1
+ fi
+-WRAPPER_SDKDIR=$(echo iPhoneOS*sdk | head -n1)
++WRAPPER_SDKDIR=$(echo iPhoneSimulator*sdk | head -n1)
+ if [ -z "$WRAPPER_SDKDIR" ]; then
+     echo "broken SDK" 1>&2
+     exit 1
+-- 
+2.37.1 (Apple Git-137.1)
+
