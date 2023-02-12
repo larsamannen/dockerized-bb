@@ -103,7 +103,7 @@ helpers_package(faad2)
 
 helpers_package(libmad)
 
-helpers_package(libogg)
+local_package(libogg)
 
 helpers_package(libtheora)
 
