@@ -93,7 +93,7 @@ local_package(compiler-rt)
 # Needed for freetype (at least that's what ScummVM thinks)
 local_package(bzip2, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libpng1.6, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+local_package(libpng1.6, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 helpers_package(libjpeg-turbo, -DCMAKE_TOOLCHAIN_FILE=${TARGET_DIR}/iphone.platform -DREQUIRE_SIMD=0 -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-fembed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode")
 
@@ -103,18 +103,18 @@ helpers_package(faad2, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLA
 
 helpers_package(libmad, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-helpers_package(libogg, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+local_package(libogg, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 helpers_package(libtheora, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
-COPY ./packages/libvorbis lib-helpers/packages/libvorbis
-helpers_package(libvorbis, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+#COPY ./packages/libvorbis lib-helpers/packages/libvorbis
+local_package(libvorbis, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 helpers_package(flac, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 # Don't enable assembly part: it doesn't build
-COPY ./packages/mpeg2dec lib-helpers/packages/mpeg2dec
-helpers_package(mpeg2dec, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+#COPY ./packages/mpeg2dec lib-helpers/packages/mpeg2dec
+local_package(mpeg2dec, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 helpers_package(a52dec, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
@@ -125,14 +125,13 @@ COPY ./packages/curl lib-helpers/packages/curl
 helpers_package(curl, --without-ssl --with-secure-transport, CFLAGS="-miphoneos-version-min=IPHONEOS_DEPLOYMENT_TARGET -fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 #    helpers_package(freetype, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
-local_package(freetype, -DFT_DISABLE_BZIP2=TRUE -DFT_DISABLE_PNG=TRUE -DFT_DISABLE_HARFBUZZ=TRUE -DFT_DISABLE_BROTLI=TRUE -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-f
-embed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode")
+local_package(freetype, -DCMAKE_C_FLAGS="-fembed-bitcode" -DCMAKE_CXX_FLAGS="-fembed-bitcode" -DCMAKE_EXE_LINKER_FLAGS="-fembed-bitcode")
 
-helpers_package(fribidi, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+local_package(fribidi, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 # Don't depend on SDL2 (paradoxical)
-COPY ./packages/libsdl2-net lib-helpers/packages/libsdl2-net
-helpers_package(libsdl2-net, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
+#COPY ./packages/libsdl2-net lib-helpers/packages/libsdl2-net
+local_package(libsdl2-net, CFLAGS="-fembed-bitcode" CPPFLAGS="-fembed-bitcode" LDFLAGS="-fembed-bitcode")
 
 # Lighten glib build by removing Objective C and Cocoa and fix intl detection
 #COPY packages/fluidsynth lib-helpers/packages/fluidsynth

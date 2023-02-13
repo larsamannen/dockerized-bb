@@ -1,0 +1,53 @@
+diff --git a/acinclude.m4 b/acinclude.m4
+index 61ecd4fe1..43c23d7cc 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -2574,7 +2574,7 @@ AC_DEFUN([CURL_SUPPORTS_BUILTIN_AVAILABLE], [
+     ]])
+   ],[
+     AC_MSG_RESULT([yes])
+-    AC_DEFINE_UNQUOTED(HAVE_BUILTIN_AVAILABLE, 1,
++    AC_DEFINE_UNQUOTED(HAVE_BUILTIN_AVAILABLE, 0,
+         [Define to 1 if you have the __builtin_available function.])
+   ],[
+     AC_MSG_RESULT([no])
+diff --git a/lib/connect.c b/lib/connect.c
+index e65d24d9e..3d87655a4 100644
+--- a/lib/connect.c
++++ b/lib/connect.c
+@@ -1227,21 +1227,21 @@ static CURLcode singleipconnect(struct connectdata *conn,
+       /* while connectx function is available since macOS 10.11 / iOS 9,
+          it did not have the interface declared correctly until
+          Xcode 9 / macOS SDK 10.13 */
+-      if(__builtin_available(macOS 10.11, iOS 9.0, tvOS 9.0, watchOS 2.0, *)) {
+-        sa_endpoints_t endpoints;
+-        endpoints.sae_srcif = 0;
+-        endpoints.sae_srcaddr = NULL;
+-        endpoints.sae_srcaddrlen = 0;
+-        endpoints.sae_dstaddr = &addr.sa_addr;
+-        endpoints.sae_dstaddrlen = addr.addrlen;
+-
+-        rc = connectx(sockfd, &endpoints, SAE_ASSOCID_ANY,
+-                      CONNECT_RESUME_ON_READ_WRITE | CONNECT_DATA_IDEMPOTENT,
+-                      NULL, 0, NULL, NULL);
+-      }
+-      else {
++//     if(__builtin_available(macOS 10.11, iOS 9.0, tvOS 9.0, watchOS 2.0, *)) {
++//        sa_endpoints_t endpoints;
++//        endpoints.sae_srcif = 0;
++//        endpoints.sae_srcaddr = NULL;
++//        endpoints.sae_srcaddrlen = 0;
++//        endpoints.sae_dstaddr = &addr.sa_addr;
++//        endpoints.sae_dstaddrlen = addr.addrlen;
++
++//        rc = connectx(sockfd, &endpoints, SAE_ASSOCID_ANY,
++//                      CONNECT_RESUME_ON_READ_WRITE | CONNECT_DATA_IDEMPOTENT,
++//                      NULL, 0, NULL, NULL);
++//      }
++//      else {
+         rc = connect(sockfd, &addr.sa_addr, addr.addrlen);
+-      }
++//      }
+ #  else
+       rc = connect(sockfd, &addr.sa_addr, addr.addrlen);
+ #  endif /* HAVE_BUILTIN_AVAILABLE */
